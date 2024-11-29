@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Beranda - KULIAH PAKAR</title>
+
+    <!-- Link ke CSS eksternal untuk ikon dan font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <style>
+      /* Reset dan styling dasar */
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        height: 100vh;
+        overflow-x: hidden;
+        position: relative;
+        background-color: hsl(249, 71%, 11%); /* Warna latar belakang gelap */
+      }
+
+      /* Video latar belakang - Full screen */
+      .video-background {
+        position: fixed; /* Pastikan video selalu berada di belakang konten */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Menyesuaikan video agar menutupi seluruh layar */
+        object-position: center center; /* Memastikan video terpusat secara vertikal dan horizontal */
+        z-index: -1; /* Video berada di belakang konten */
+      }
+
+      /* Menu navbar */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-around; /* Untuk mendistribusikan item secara horizontal */
+        background-color: rgba(0, 77, 122, 0.9);
+        padding: 15px 0;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .navbar a {
+        padding: 12px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        display: inline-block;
+        font-weight: 600;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .navbar a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        transform: scale(1.1);
+      }
+
+      /* Kontainer utama */
+      .container {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 60px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        max-width: 900px;
+        margin: 150px auto;
+        text-align: center;
+        backdrop-filter: blur(5px);
+      }
+
+      h1 {
+        font-size: 3.5em;
+        font-weight: bold;
+        color: transparent;
+        background: linear-gradient(to right, #00d2ff, #00ffcc);
+        -webkit-background-clip: text;
+        background-clip: text;
+        text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        animation: slideInFromLeft 3s ease-out, pulse 2s infinite;
+      }
+
+      /* Animasi bergerak dan berdenyut */
+      @keyframes slideInFromLeft {
+        0% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+
+        50% {
+          transform: translateX(10%);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+
+        50% {
+          transform: scale(1.1);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .button {
+        background-color: #00d2ff;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        font-size: 1.2em;
+        margin-top: 20px;
+        transition: background-color 0.3s, transform 0.3s;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .button:hover {
+        background-color: #0199c8;
+        transform: translateY(-5px);
+      }
+
+      /* Styling gambar promosi untuk responsif */
+      .main-image {
+        max-width: 100%;
+        height: auto;
+        margin-top: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 30px 20px;
+        background-color: #222;
+        color: white;
+        margin-top: 50px;
+      }
+
+      .footer-content {
+        margin: 0;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin-top: 15px;
+      }
+
+      .footer-links li {
+        display: inline;
+        margin: 0 15px;
+      }
+
+      .footer-links a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.1em;
+        transition: color 0.3s;
+      }
+
+      .footer-links a:hover {
+        color: #00d2ff;
+      }
+
+      /* Profil Pemateri */
+      .professor-profiles {
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        margin-top: 60px;
+        flex-wrap: wrap;
+        justify-content: center; /* Centering profiles */
+      }
+
+      .profile-card {
+        background-color: rgba(0, 77, 122, 0.8);
+        border-radius: 15px;
+        width: 180px;
+        padding: 15px;
+        box-shadow: 0 40px 20px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin: 30px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .profile-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+      }
+
+      .profile-card img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        border: 4px solid white;
+      }
+
+      .profile-card h3 {
+        font-size: 1.4em;
+        margin: 10px 0;
+        color: #fff;
+      }
+
+      .profile-card p {
+        font-size: 1.1em;
+        color: #ddd;
+      }
+
+      .theme {
+        color: #00d2ff;
+        font-weight: bold;
+        margin-top: 10px;
+        text-transform: uppercase;
+      }
+
+      /* Teks dan button series */
+      .series-column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 5px 5px;
+        font-size: 1em;
+        font-weight: bold;
+        font-family: "Roboto", sans-serif;
+        border-radius: 5px;
+        animation: slideIn 1s ease-out;
+        margin-top: 2px;
+        text-align: center;
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+        letter-spacing: 1px;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+      }
+
+      /* Animasi slideIn */
+      @keyframes slideIn {
+        0% {
+          transform: translateX(-100%);
+          opacity: 0;
+        }
+
+        100% {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* Responsif untuk perangkat kecil */
+      @media (max-width: 768px) {
+        .navbar {
+          flex-direction: row; /* Tetap horizontal pada layar kecil */
+          justify-content: space-between; /* Memastikan item menu tersebar merata */
+          padding: 10px 20px;
+        }
+
+        .navbar a {
+          font-size: 16px; /* Menyesuaikan ukuran font */
+          padding: 10px 15px; /* Menyesuaikan padding */
+        }
+
+        .container {
+          padding: 40px;
+        }
+
+        .professor-profiles {
+          flex-direction: row;
+          justify-content: center;
+          gap: 20px;
+        }
+
+        .profile-card {
+          width: 200px;
+          padding: 20px;
+        }
+
+        .series-column {
+          font-size: 1.5em;
+          padding: 10px 25px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Video background -->
+    <video class="video-background" autoplay muted loop>
+      <source
+        src="Telematika Dalam Kejadian Fraud di Rumah Sakit.mp4"
+        type="video/mp4"
+      />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <a href="dashboard.html" aria-label="Beranda">
+        <i class="fa fa-home"></i>
+      </a>
+      <a href="Lokasi.html" aria-label="Lokasi">
+        <i class="fa fa-map-marker"></i>
+        <span class="sr-only">Lokasi</span>
+      </a>
+      <a href="Profil.html" aria-label="Profil">
+        <i class="fa fa-user"></i>
+      </a>
+      <a href="PromosiKampus.html" aria-label="Promosi Kampus">
+        <i class="fa fa-university"></i>
+        <span class="sr-only">Promosi Kampus</span>
+      </a>
+      <a href="logout.html" aria-label="Keluar">
+        <i class="fa fa-sign-out"></i>
+        <span class="sr-only">Keluar</span>
+      </a>
+    </div>
+
+    <!-- Konten utama -->
+    <main>
+      <div class="container">
+        <h1>Selamat Datang</h1>
+        <p>STIKES BAKTI NUSANTARA GORONTALO</p>
+        <img
+          src="Gambar WhatsApp 2024-11-21 pukul 09.58.48_508ffc14.jpg"
+          alt="Foto Beranda"
+          class="main-image"
+        />
+      </div>
+
+      <div class="series-column">Sabtu 07, Desember, 2024</div>
+      <div class="professor-profiles">
+        <div class="profile-card">
+          <img src="PROF.png" alt="Narasumber" />
+          <h3>Assoc. Prof. Dr. Rina Arum Prastyanti, SH., MH</h3>
+          <p class="theme">
+            Tema: Hukum Telematika Dalam Kejadian Fraud di Rumah Sakit
+          </p>
+        </div>
+        <div class="profile-card">
+          <img src="BERANDA PORMOSI.png" alt="Pemateri 1" />
+          <h3>Merlin Abd. Rahman, S.KM., M.Si</h3>
+          <p class="theme">
+            Tema : Sistem Informasi Pelayanan Kesehatan di Rumah Sakit
+          </p>
+        </div>
+      </div>
+
+      <div class="series-column">Sabtu 14 Desember, 2024</div>
+      <div class="professor-profiles">
+        <div class="profile-card">
+          <img src="ARIS-removebg-preview.png" alt="Narasumber" />
+          <h3>Ns. Aris Prio Agus Santoso, S.Kep., SH., MH</h3>
+          <p class="theme">
+            Tema : Tanggung Jawab Hukum Tenaga Kesehatan Gizi dan Perekam Medis
+            di Fasilitas Pelayanan Kesehatan
+          </p>
+        </div>
+        <div class="profile-card">
+          <img src="Rismunandar katili.png" alt="Pemateri 2" />
+          <h3>Rismunandar Katili, S.Kep., MH</h3>
+          <p class="theme">
+            Tema : Alternatif Penyelesaian Sengketa Kesehatan 'Non Litigasi'
+          </p>
+        </div>
+      </div>
+
+      <div class="container">
+        <a href="pendaftaran.html" class="button" style="margin-top: 30px"
+          >Daftar Sekarang</a
+        >
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <ul class="footer-links">
+          <li><a href="Tentang kami.html">Tentang Kami</a></li>
+          <li><a href="Privasi.html">Kebijakan Privasi</a></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>
